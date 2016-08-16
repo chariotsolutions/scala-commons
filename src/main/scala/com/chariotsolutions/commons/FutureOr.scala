@@ -32,7 +32,9 @@ case class FutureOr[+A, +E](future: Future[A Or E]) extends AnyVal {
 
 object FutureOr {
 
-  def successful[A, E](a: A): FutureOr[A, E] = FutureOr(Future.successful(Good(a)))
+  def successful[A, E](or: A Or E): FutureOr[A, E] = FutureOr(Future.successful(or))
+
+  def good[A, E](a: A): FutureOr[A, E] = FutureOr(Future.successful(Good(a)))
 
   def bad[A, E](e: E): FutureOr[A, E] = FutureOr(Future.successful(Bad(e)))
 
